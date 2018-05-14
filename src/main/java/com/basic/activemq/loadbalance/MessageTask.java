@@ -1,4 +1,4 @@
-package com.basic.activemq.action;
+package com.basic.activemq.loadbalance;
 
 import javax.jms.MapMessage;
 

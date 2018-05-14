@@ -1,4 +1,4 @@
-package com.basic.activemq.action;
+package com.basic.activemq.loadbalance;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -11,16 +11,16 @@ import java.util.concurrent.Executors;
  * Created by mastertj on 2018/5/14.
  * 消费者
  */
-public class BalanceConsumerB {
+public class BalanceConsumerA {
     //单列模式
-    private static BalanceConsumerB instance=null;
+    private static BalanceConsumerA instance=null;
 
     //选择器
-    private final String SELECTOR_2="receiver = 'B'";
+    private final String SELECTOR_2="receiver = 'A'";
 
-    private static synchronized BalanceConsumerB getInstance(){
+    private static synchronized BalanceConsumerA getInstance(){
         if(instance==null){
-            instance=new BalanceConsumerB();
+            instance=new BalanceConsumerA();
         }
         return instance;
     }
@@ -40,7 +40,7 @@ public class BalanceConsumerB {
     //5.目标地址
     private Destination destination;
 
-    public BalanceConsumerB() {
+    public BalanceConsumerA() {
         try {
             this.connectionFactory=new ActiveMQConnectionFactory(
                     ActiveMQConnectionFactory.DEFAULT_USER,
@@ -89,7 +89,7 @@ public class BalanceConsumerB {
     }
 
     public static void main(String[] args) throws JMSException {
-        BalanceConsumerB consumer= BalanceConsumerB.getInstance();
+        BalanceConsumerA consumer= BalanceConsumerA.getInstance();
         consumer.receiver();
         System.out.println("-------------over-------------");
     }
