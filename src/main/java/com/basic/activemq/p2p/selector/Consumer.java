@@ -1,4 +1,4 @@
-package com.basic.activemq.p2p;
+package com.basic.activemq.p2p.selector;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -14,7 +14,7 @@ public class Consumer {
     private static Consumer instance=null;
 
     //选择器
-    private final String SELECTOR_2="age>50";
+    private final String SELECTOR_2="age > 50";
 
     private static synchronized Consumer getInstance(){
         if(instance==null){
@@ -49,7 +49,7 @@ public class Consumer {
             connection.start();
             this.session=connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
             this.destination=session.createQueue("students");
-            this.messageConsumer=session.createConsumer(destination);
+            this.messageConsumer=session.createConsumer(destination,SELECTOR_2);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class Consumer {
     }
 
     public static void main(String[] args) throws JMSException {
-        Consumer consumer=Consumer.getInstance();
+        Consumer consumer= Consumer.getInstance();
         consumer.receiver();
         System.out.println("-------------over-------------");
     }

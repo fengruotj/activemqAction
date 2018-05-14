@@ -1,21 +1,20 @@
-package com.basic.activemq.selector;
+package com.basic.activemq.pb;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.jms.*;
 
 /**
- * locate com.basic.activemq.p2p
+ * locate com.basic.activemq.pb
  * Created by mastertj on 2018/5/14.
- * 生产者
  */
-public class Producer {
+public class Publish {
     //单列模式
-    private static Producer instance=null;
+    private static Publish instance=null;
 
-    private static synchronized Producer getInstance(){
+    private static synchronized Publish getInstance(){
         if(instance==null){
-            instance=new Producer();
+            instance=new Publish();
         }
         return instance;
     }
@@ -31,7 +30,7 @@ public class Producer {
     // 4.生产者
     private MessageProducer messageProducer;
 
-    public Producer() {
+    public Publish() {
         try {
             this.connectionFactory=new ActiveMQConnectionFactory(
                     ActiveMQConnectionFactory.DEFAULT_USER,
@@ -40,7 +39,7 @@ public class Producer {
             );
             this.connection=connectionFactory.createConnection();
             connection.start();
-            this.session=connection.createSession(Boolean.FALSE,Session.AUTO_ACKNOWLEDGE);
+            this.session=connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
             this.messageProducer=session.createProducer(null);
 
         } catch (Exception e) {
@@ -68,24 +67,19 @@ public class Producer {
         }
     }
 
-    public void send1(String queueName){
+    public void sendMessage(String topic){
         try {
-            for(int i=0;i<100;i++){
-                Destination destination = session.createQueue(queueName);
-                MapMessage mapMessage=session.createMapMessage();
-                mapMessage.setString("name","谭杰"+i);
-                mapMessage.setIntProperty("age",23+i);
-                mapMessage.setString("addresss","武汉");
-                this.messageProducer.send(destination,mapMessage);
-            }
+            Destination destination = session.createTopic(topic);
+            TextMessage textMessage= session.createTextMessage("我是内容");
+            messageProducer.send(destination,textMessage);
         } catch (JMSException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        Producer producer = Producer.getInstance();
-        producer.send1("students");
-        producer.close();
+        Publish publish=Publish.getInstance();
+        publish.sendMessage("PublishSubscribe");
+        publish.close();
     }
 }

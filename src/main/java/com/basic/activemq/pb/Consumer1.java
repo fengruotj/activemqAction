@@ -1,4 +1,4 @@
-package com.basic.activemq.selector;
+package com.basic.activemq.pb;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -9,16 +9,16 @@ import javax.jms.*;
  * Created by mastertj on 2018/5/14.
  * 消费者
  */
-public class Consumer {
+public class Consumer1 {
     //单列模式
-    private static Consumer instance=null;
+    private static Consumer1 instance=null;
 
     //选择器
-    private final String SELECTOR_2="age > 50";
+    private final String SELECTOR_2="age>50";
 
-    private static synchronized Consumer getInstance(){
+    private static synchronized Consumer1 getInstance(){
         if(instance==null){
-            instance=new Consumer();
+            instance=new Consumer1();
         }
         return instance;
     }
@@ -38,7 +38,7 @@ public class Consumer {
     //5.目标地址
     private Destination destination;
 
-    public Consumer() {
+    public Consumer1() {
         try {
             this.connectionFactory=new ActiveMQConnectionFactory(
                     ActiveMQConnectionFactory.DEFAULT_USER,
@@ -48,8 +48,8 @@ public class Consumer {
             this.connection=connectionFactory.createConnection();
             connection.start();
             this.session=connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
-            this.destination=session.createQueue("students");
-            this.messageConsumer=session.createConsumer(destination,SELECTOR_2);
+            this.destination=session.createTopic("PublishSubscribe");
+            this.messageConsumer=session.createConsumer(destination);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,10 +83,10 @@ public class Consumer {
                     try {
                         if(message instanceof TextMessage){
                             TextMessage textMessage= (TextMessage) message;
-                            System.out.println(textMessage.getText());
+                            System.out.println("consumer1:" +textMessage.getText());
                         }else if(message instanceof MapMessage){
                             MapMessage mapMessage= (MapMessage) message;
-                            System.out.println("name: "+mapMessage.getString("name")+" age: "+mapMessage.getIntProperty("age")+" address: "+mapMessage.getString("addresss"));
+                            System.out.println(mapMessage.toString());
                         }
                     } catch (JMSException e) {
                         e.printStackTrace();
@@ -96,8 +96,8 @@ public class Consumer {
     }
 
     public static void main(String[] args) throws JMSException {
-        Consumer consumer= Consumer.getInstance();
+        Consumer1 consumer= Consumer1.getInstance();
         consumer.receiver();
-        System.out.println("-------------over-------------");
+        System.out.println("-------------consumer1 over-------------");
     }
 }
