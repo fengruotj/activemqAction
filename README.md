@@ -1,0 +1,2 @@
+# activemqAction
+ActiveMQ是由Apache出品的，一款最流行的，能力强劲的开源消息总线。它是一个消息中间件，本项目是一个ActiveMQ的学习项目。包括ActiveMQ的API的使用以及生产者消费者模型
