@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/loadbalance/loadbalance.iml" filepath="$PROJECT_DIR$/loadbalance/loadbalance.iml" />
       <module fileurl="file://$PROJECT_DIR$/pointTopoint/pointTopoint.iml" filepath="$PROJECT_DIR$/pointTopoint/pointTopoint.iml" />
       <module fileurl="file://$PROJECT_DIR$/publishSubscribe/publishSubscribe.iml" filepath="$PROJECT_DIR$/publishSubscribe/publishSubscribe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/requestResponse/requestResponse.iml" filepath="$PROJECT_DIR$/requestResponse/requestResponse.iml" />
     </modules>
   </component>
 </project>
