@@ -6,11 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="activemqAction" />
+        <module name="helloworld" />
+        <module name="loadbalance" />
+        <module name="pointTopoint" />
+        <module name="publishSubscribe" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="activemqAction" target="1.8" />
+      <module name="helloworld" target="1.8" />
+      <module name="loadbalance" target="1.8" />
+      <module name="pointTopoint" target="1.8" />
+      <module name="publishSubscribe" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

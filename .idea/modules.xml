@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/activemqAction.iml" filepath="$PROJECT_DIR$/activemqAction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/helloworld/helloworld.iml" filepath="$PROJECT_DIR$/helloworld/helloworld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadbalance/loadbalance.iml" filepath="$PROJECT_DIR$/loadbalance/loadbalance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pointTopoint/pointTopoint.iml" filepath="$PROJECT_DIR$/pointTopoint/pointTopoint.iml" />
+      <module fileurl="file://$PROJECT_DIR$/publishSubscribe/publishSubscribe.iml" filepath="$PROJECT_DIR$/publishSubscribe/publishSubscribe.iml" />
     </modules>
   </component>
 </project>
